@@ -7,329 +7,788 @@
   <title>Magic Games</title>
   <style>
     body {
-  font-family: sans-serif;
-  background-color: blueviolet;
-  margin: 0;
-  padding: 0;
-}
+      font-family: sans-serif;
+      background-color: blueviolet;
+      margin: 0;
+      padding: 0;
+    }
 
-header {
-  background-color: rebeccapurple;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
+    header {
+      background-color: rebeccapurple;
+      padding: 10px;
+      text-align: center;
+      color: white;
+    }
 
-h1 {
-  color: white;
-  text-align: center;
-}
+    .grass img {
+      width: 100%;
+      height: auto;
+    }
 
-footer {
-  background-color: rebeccapurple;
-}
+    .grass {
+      position: relative;
+      height: 1300px;
+    }
 
-.grass img {
-  width: 100%;
-  height: auto;
-}
+    .village-layout {
+      position: absolute;
+      top: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: grid;
+      grid-template-columns: 1fr 100px 1fr;
+      gap: 20px;
+      justify-items: center;
+      align-items: start;
+      z-index: 5;
+    }
 
-.grass {
-  position: relative;
-  height: 1300px;
-}
+    .house-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-.selo1 {
-  padding: 20px;
-  position: relative;
-}
+    .house1 button,
+    .shop button,
+    .house2 button,
+    .shop2 button {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
 
-.village-layout {
-  position: absolute;
-  top: 200px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: grid;
-  grid-template-columns: 1fr 100px 1fr;
-  gap: 20px;
-  justify-items: center;
-  align-items: start;
-  z-index: 5;
-}
+    .house1 img,
+    .shop img,
+    .house2 img,
+    .shop2 img {
+      width: 200px;
+      height: auto;
+      border: 2px solid #555;
+      border-radius: 8px;
+    }
 
-.house-column {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+    .dialog-box {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid white;
+      border-radius: 10px;
+      padding: 20px;
+      font-size: 18px;
+      z-index: 1000;
+      display: none;
+    }
 
-.house1 button,
-.shop button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+    .character-name {
+      font-weight: bold;
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
 
-.house1 img,
-.shop img {
-  width: 200px;
-  height: auto;
-  border: 2px solid #555;
-  border-radius: 8px;
-}
+    .dialog-text {
+      color: white;
+    }
 
-.shop {
-  display: flex;
-  margin-bottom: auto;
-  align-items: center;
-}
+    #nextBtn {
+      margin-top: 10px;
+      background: #444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
 
-#startBtn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  padding: 15px 30px;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  z-index: 10;
-}
+    .portrait {
+      position: fixed;
+      bottom: 150px;
+      left: 50px;
+      width: 200px;
+      height: auto;
+      z-index: 999;
+      border: 2px solid white;
+      border-radius: 10px;
+      display: none;
+      max-height: 150px;
+    }
 
-.dialog-box {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid white;
-  border-radius: 10px;
-  padding: 20px;
-  font-size: 18px;
-  z-index: 1000;
-  display: none;
-}
+    #houseMessage {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      border: 2px solid black;
+      padding: 10px;
+      z-index: 1001;
+      font-family: sans-serif;
+    }
 
-.character-name {
-  font-weight: bold;
-  color: #ffcc00;
-  margin-bottom: 10px;
-}
+    .direction-choice {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #008000;
+      color: white;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1002;
+      font-size: 24px;
+      font-family: sans-serif;
+    }
 
-.dialog-text {
-  color: white;
-}
+    .direction-choice p {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 28px;
+      font-weight: bold;
+    }
 
-#nextBtn {
-  margin-top: 10px;
-  background: #444;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-}
+    .dir-btn {
+      padding: 15px 30px;
+      background: #005500;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+    }
 
-.portrait {
-  position: fixed;
-  bottom: 150px;
-  left: 50px;
-  width: 200px;
-  height: auto;
-  z-index: 999;
-  border: 2px solid white;
-  border-radius: 10px;
-  display: none;
-  max-height: 150px;
-}
+    #leftBtn, #rightBtn, #leftBtnSecond, #rightBtnSecond {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
 
-#houseMessage {
-  display: none;
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  border: 2px solid black;
-  padding: 10px;
-  z-index: 1001;
-  font-family: sans-serif;
-}
+    #leftBtn, #leftBtnSecond {
+      left: 50px;
+    }
 
-.direction-choice {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #008000;
-  color: white;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1002;
-  font-size: 24px;
-  font-family: sans-serif;
-}
+    #rightBtn, #rightBtnSecond {
+      right: 50px;
+    }
 
-.direction-choice p {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 28px;
-  font-weight: bold;
-}
+    #screenOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(1, 1, 1, 1);
+      display: none;
+      z-index: 1003;
+    }
 
-#leftBtn {
-  position: absolute;
-  top: 50%;
-  left: 50px;
-  transform: translateY(-50%);
-}
+    #exitBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 15px 25px;
+      font-size: 16px;
+      background: darkred;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 100;
+    }
 
-#rightBtn {
-  position: absolute;
-  top: 50%;
-  right: 50px;
-  transform: translateY(-50%);
-}
+    .mountain-bg {
+      position: relative;
+      text-align: center;
+    }
 
-.dir-btn {
-  padding: 15px 30px;
-  background: #005500;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  cursor: pointer;
-}
+    .mountain-bg img {
+      width: 100%;
+      height: auto;
+    }
 
-#screenOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(1, 1, 1, 1);
-  display: none;
-  z-index: 1003;
-}
+    .mountain-text {
+      position: absolute;
+      top: 20%;
+      left: 10%;
+      background-color: rgba(255,255,255,0.8);
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-#secondDirectionChoice {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #008000;
-  color: white;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1002;
-  font-size: 24px;
-  font-family: sans-serif;
-}
+    /* Стиль для повідомлення news1 */
+    .news1 {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-#secondDirectionChoice p {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 28px;
-  font-weight: bold;
-}
+    .news1 img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <header><h1>Magic Game</h1></header>
 
-#leftBtnSecond {
-  position: absolute;
-  top: 50%;
-  left: 50px;
-  transform: translateY(-50%);
-}
+  <!-- Повідомлення, що висвітлюється на весь екран -->
+  <div class="news1" id="news1">
+    <img src="news1.jpg" alt="Новина" />
+  </div>
 
-#rightBtnSecond {
-  position: absolute;
-  top: 50%;
-  right: 50px;
-  transform: translateY(-50%);
-}
+  <script>
+    // Функція для приховування повідомлення через 5 секунд
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById("news1").style.display = "none";
+      }, 5000); // приховує через 5 секунд
+    }
+  </script>
+
+  <!-- Ваш основний контент тут -->
+  <div class="hints-box">
+    <h2>Що робити далі?</h2>
+    <img src="carta.png" width="200px" height="220px">
+    <ol>
+      <li>Купити найсильніший кристал</li>
+      <li>Піти за картою і перемогти дракона</li>
+    </ol>
+  </div>
+  <!-- Перше село -->
+  <div class="selo1">
+    <div class="grass">
+      <img src="grass.jpg" alt="Grass" />
+      <div class="village-layout">
+        <div class="house-column">
+          <div class="house1"><button><img src="1.png" alt="Будинок"></button></div>
+          <div class="house1"><button><img src="1.png" alt="Будинок"></button></div>
+          <div class="house1"><button><img src="1.png" alt="Будинок"></button></div>
+          <div class="house1"><button><img src="1.png" alt="Будинок"></button></div>
+        </div>
+        <div class="shop">
+          <button id="startBtn"><img src="shop.png" alt="Shop" /></button>
+        </div>
+        <div class="house-column">
+          <div class="house1"><button><img src="1.png" alt="Будинок"></button></div>
+          <div class="house1"><button><img src="1.png" alt="Будинок"></button></div>
+          <div class="house1"><button><img src="1.png" alt="Будинок"></button></div>
+          <div class="house1"><button><img src="1.png" alt="Будинок"></button></div>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-box" id="dialogBox">
+      <div class="character-name" id="charName">Я</div>
+      <div class="dialog-text" id="dialogText">...</div>
+      <button id="nextBtn">Далі</button>
+    </div>
+    <img src="i1.png" id="portrait" class="portrait" alt="Character" />
+  </div>
+
+  <!-- Друге село -->
+  <div class="selo2" style="display:none;">
+    <div class="grass">
+      <img src="grass.jpg" alt="Grass" />
+      <div class="village-layout">
+        <div class="house-column">
+          <div class="house2"><button><img src="2.png" alt="Будинок 2"></button></div>
+          <div class="house2"><button><img src="house2.png" alt="Будинок 2"></button></div>
+          <div class="house2"><button><img src="2.png" alt="Будинок 2"></button></div>
+          <div class="house2"><button><img src="house2.png" alt="Будинок 2"></button></div>
+        </div>
+        <div class="shop2">
+          <button><img src="3.png" alt="Новий магазин" /></button>
+        </div>
+        <div class="house-column">
+          <div class="house2"><button><img src="2.png" alt="Будинок 2"></button></div>
+          <div class="house2"><button><img src="2.png" alt="Будинок 2"></button></div>
+          <div class="house2"><button><img src="house2.png" alt="Будинок 2"></button></div>
+          <div class="house2"><button><img src="house2.png" alt="Будинок 2"></button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Гора -->
+<div class="mountain" style="display:none;">
+  <div class="mountain-bg">
+    
+  <style>
+
+
+    #dragonfight {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .minigame {
+      display: none;
+      margin: 0 auto;
+      width: 340px;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px #000;
+    }
+
+    .bar {
+      position: relative;
+      width: 300px;
+      height: 20px;
+      background-color: #ccc;
+      border: 2px solid #444;
+      border-radius: 10px;
+      margin: 0 auto 20px auto;
+      overflow: hidden;
+    }
+
+    .green-zone {
+      position: absolute;
+      height: 100%;
+      background-color: limegreen;
+    }
+
+    .cursor {
+      position: absolute;
+      width: 5px;
+      height: 100%;
+      background-color: red;
+      left: 0;
+    }
+
+    .xp-container {
+      margin: 10px 0;
+      text-align: left;
+    }
+
+    .xp-label {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .xp-bar {
+      width: 100%;
+      height: 16px;
+      background-color: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .xp-fill {
+      height: 100%;
+      background-color: #00ff88;
+      width: 100%;
+      transition: width 0.3s;
+    }
+
+    .enemy-fill {
+      background-color: #ff4444;
+    }
+
+    #result {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+ 
+
+  <button id="dragonfight"><img src="pechera-.png"></button>
+
+  <div class="minigame" id="game">
+    <div class="xp-container">
+      <div class="xp-label">Твоє HP</div>
+      <div class="xp-bar"><div class="xp-fill" id="playerHpBar"></div></div>
+    </div>
+
+    <div class="xp-container">
+      <div class="xp-label">HP дракона</div>
+      <div class="xp-bar"><div class="xp-fill enemy-fill" id="gameXp"></div></div>
+    </div>
+
+    <div class="bar">
+      <div class="green-zone" id="greenZone"></div>
+      <div class="cursor" id="cursor"></div>
+    </div>
+
+    <p id="result"></p>
+    <img src="dragon.jpg" wight="450px" height="auto" >
+  </div>
+
+  <script>
+    const dragonfight = document.getElementById('dragonfight');
+    const gameContainer = document.getElementById('game');
+    const cursor = document.getElementById('cursor');
+    const greenZone = document.getElementById('greenZone');
+    const result = document.getElementById('result');
+    const playerHpBar = document.getElementById('playerHpBar');
+    const gameXp = document.getElementById('gameXp');
+
+    let direction = 1;
+    let position = 0;
+    let speed = 2;
+    let successCount = 0;
+    let missCount = 0;
+    let playing = false;
+    const maxHp = 15;
+    const barWidth = 300;
+    const greenZoneMin = 5;
+    const greenZoneStart = 75;
+    let currentGreenWidth = greenZoneStart;
+
+    dragonfight.addEventListener('click', () => {
+      gameContainer.style.display = 'block';
+      dragonfight.style.display = 'none';
+      resetGame();
+    });
+
+    function animateCursor() {
+      if (!playing) return;
+
+      position += direction * speed;
+      if (position >= (barWidth - 5) || position <= 0) direction *= -1;
+
+      cursor.style.left = position + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+
+    function placeGreenZoneRandomly() {
+      const maxLeft = barWidth - currentGreenWidth;
+      const randomLeft = Math.floor(Math.random() * maxLeft);
+      greenZone.style.left = randomLeft + 'px';
+      greenZone.style.width = currentGreenWidth + 'px';
+    }
+
+    function resetRound() {
+      position = 0;
+      direction = 1;
+      playing = true;
+      result.textContent = '';
+      placeGreenZoneRandomly();
+      animateCursor();
+    }
+
+    function updateBars() {
+      const hpPercent = ((maxHp - missCount) / maxHp) * 100;
+      const dragonPercent = ((maxHp - successCount) / maxHp) * 100;
+      playerHpBar.style.width = hpPercent + '%';
+      gameXp.style.width = dragonPercent + '%';
+    }
+
+    function resetGame() {
+      direction = 1;
+      position = 0;
+      speed = 2;
+      successCount = 0;
+      missCount = 0;
+      currentGreenWidth = greenZoneStart;
+      result.textContent = '';
+      updateBars();
+      placeGreenZoneRandomly();
+      playing = true;
+      animateCursor();
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (!playing) return;
+      if (e.code === 'Space') {
+        const greenStart = greenZone.offsetLeft;
+        const greenEnd = greenStart + greenZone.offsetWidth;
+
+        if (position >= greenStart && position <= greenEnd) {
+          successCount++;
+          speed += 0.5;
+          result.textContent = `✅ Влучив! Успіхів: ${successCount}`;
+          result.style.color = "lime";
+          currentGreenWidth = Math.max(greenZoneMin, currentGreenWidth - 5);
+        } else {
+          missCount++;
+          result.textContent = `❌ Мимо! Промахів: ${missCount}`;
+          result.style.color = "red";
+        }
+
+        updateBars();
+
+        if (successCount >= maxHp) {
+          result.textContent = "🎉 Ти переміг дракона!";
+          result.style.color = "gold";
+          playing = false;
+        } else if (missCount >= maxHp) {
+          result.textContent = "💀 Поразка! Дракон тебе переміг!";
+          result.style.color = "crimson";
+          playing = false;
+        } else {
+          playing = false;
+          setTimeout(resetRound, 1000);
+        }
+      }
+    });
+  </script>
+
+    <button id="backToVillageBtn" class="back-btn">Повернутись до села</button>
+  </div>
+</div>
+
+
+  <div id="houseMessage">Нікого немає вдома</div>
+  <div id="screenOverlay"></div>
+
+  <div id="directionChoice" class="direction-choice">
+    <p>Куди підеш?</p>
+    <button class="dir-btn" id="leftBtn">Наліво</button>
+    <button class="dir-btn" id="rightBtn">Направо</button>
+  </div>
+
+  <div id="secondDirectionChoice" class="direction-choice">
+    <p>Куди підеш?</p>
+    <button class="dir-btn" id="leftBtnSecond">Наліво</button>
+    <button class="dir-btn" id="rightBtnSecond">Направо</button>
+  </div>
+
+  <button id="exitBtn">Вийти з села</button>
+
+    <!-- Зображення news2, яке з'являється після перемоги -->
+    <img id="newsImage" src="path/to/news2.jpg" alt="news2">
+
+  <script>
+    const dialogs = [
+      { name: "Я", text: "Добрий день, мені потрібен найсильніший кристал.", img: "i1.png" },
+      { name: "Продавець", text: "Навіщо вам настільки сильний кристал?", img: "shopman2.png" },
+      { name: "Я", text: "Я збираюся перемогти дракона!", img: "i2.png" },
+      { name: "Продавець", text: "Не смій! Це занадто небезпечно!", img: "shopman1.png" },
+      { name: "Продавець", text: "Хоча це не моя справа — тримай кристал.", img: "shopman3.png" },
+      { name: "Я", text: "Дякую! До побачення!", img: "i1.png" }
+    ];
+
+    let index = 0;
+    let dialogEnded = false;
+    const startBtn = document.getElementById("startBtn");
+    const dialogBox = document.getElementById("dialogBox");
+    const charName = document.getElementById("charName");
+    const dialogText = document.getElementById("dialogText");
+    const nextBtn = document.getElementById("nextBtn");
+    const portrait = document.getElementById("portrait");
+
+    startBtn.addEventListener("click", () => {
+      if (dialogEnded) return;
+      dialogBox.style.display = "block";
+      portrait.style.display = "block";
+      showDialog(index);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      index++;
+      if (index < dialogs.length) {
+        showDialog(index);
+      } else {
+        dialogBox.style.display = "none";
+        portrait.style.display = "none";
+        dialogEnded = true;
+      }
+    });
+
+    function showDialog(i) {
+      const dialog = dialogs[i];
+      charName.textContent = dialog.name;
+      dialogText.textContent = dialog.text;
+      portrait.src = dialog.img;
+    }
+
+    const houseButtons = document.querySelectorAll('.house1 button');
+    const houseMessage = document.getElementById('houseMessage');
+    houseButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        houseMessage.style.display = 'block';
+        setTimeout(() => {
+          houseMessage.style.display = 'none';
+        }, 1000);
+      });
+    });
+
+    const exitBtn = document.getElementById('exitBtn');
+    const directionChoice = document.getElementById('directionChoice');
+    const secondDirectionChoice = document.getElementById('secondDirectionChoice');
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+    const leftBtnSecond = document.getElementById('leftBtnSecond');
+    const rightBtnSecond = document.getElementById('rightBtnSecond');
+    const screenOverlay = document.getElementById('screenOverlay');
+    const backToVillageBtn = document.getElementById('backToVillageBtn');
+
+    exitBtn.addEventListener('click', () => {
+      screenOverlay.style.display = 'block';
+      setTimeout(() => {
+        screenOverlay.style.display = 'none';
+        directionChoice.style.display = 'flex';
+      }, 1000);
+    });
+
+    function proceedToSecondChoice() {
+      directionChoice.style.display = 'none';
+      screenOverlay.style.display = 'block';
+      setTimeout(() => {
+        screenOverlay.style.display = 'none';
+        secondDirectionChoice.style.display = 'flex';
+      }, 500);
+    }
+
+    leftBtn.addEventListener('click', proceedToSecondChoice);
+    rightBtn.addEventListener('click', proceedToSecondChoice);
+
+    leftBtnSecond.addEventListener('click', () => {
+      secondDirectionChoice.style.display = 'none';
+      document.querySelector('.selo1').style.display = 'none';
+      screenOverlay.style.display = 'block';
+      setTimeout(() => {
+        screenOverlay.style.display = 'none';
+        document.querySelector('.mountain').style.display = 'block';
+      }, 1000);
+    });
+
+    rightBtnSecond.addEventListener('click', () => {
+      secondDirectionChoice.style.display = 'none';
+      document.querySelector('.selo1').style.display = 'none';
+      screenOverlay.style.display = 'block';
+      setTimeout(() => {
+        screenOverlay.style.display = 'none';
+        document.querySelector('.selo2').style.display = 'block';
+      }, 1000);
+    });
+
+    backToVillageBtn.addEventListener('click', () => {
+      document.querySelector('.mountain').style.display = 'none';
+      document.querySelector('.selo1').style.display = 'block';
+    });
+    let leftClickCount = 0; // Лічильник натискань на "Наліво"
+
+leftBtn.addEventListener('click', () => {
+  leftClickCount++;
+  if (leftClickCount === 2) {
+    // Якщо натиснуто двічі на "Наліво", сховати село
+    document.querySelector('.selo1').style.display = 'none';
+  } else {
+    proceedToSecondChoice();
+  }
+});
+
+leftBtnSecond.addEventListener('click', () => {
+  leftClickCount++;
+  if (leftClickCount === 2) {
+    // Якщо натиснуто двічі на "Наліво", сховати село
+    document.querySelector('.selo1').style.display = 'none';
+    document.querySelector('.mountain').style.display = 'block';
+  } else {
+    secondDirectionChoice.style.display = 'none';
+    document.querySelector('.selo1').style.display = 'none';
+    screenOverlay.style.display = 'block';
+    setTimeout(() => {
+      screenOverlay.style.display = 'none';
+      document.querySelector('.mountain').style.display = 'block';
+    }, 1000);
+  }
+});
+
+  let playerHealth = 100;
+  let dragonHealth = 100;
+  let inBattle = false;
+
+  function attack() {
+    if (!inBattle) {
+      inBattle = true;
+      document.getElementById("attack-button").disabled = false;
+      document.getElementById("battle-log").innerHTML = "";
+      document.getElementById("game-text").innerHTML = "Битва з драконом розпочалась!";
+    }
+
+    const playerDamage = Math.floor(Math.random() * 20) + 5;
+    const dragonDamage = Math.floor(Math.random() * 15) + 5;
+
+    dragonHealth -= playerDamage;
+    playerHealth -= dragonDamage;
+
+    document.getElementById("battle-log").innerHTML += `Ви вдарили дракона на ${playerDamage} шкоди.<br>`;
+    document.getElementById("battle-log").innerHTML += `Дракон вдарив вас на ${dragonDamage} шкоди.<br>`;
+    document.getElementById("player-health").innerText = playerHealth;
+    document.getElementById("dragon-health").innerText = dragonHealth;
+
+    if (dragonHealth <= 0 && playerHealth > 0) {
+      document.getElementById("game-text").innerHTML = "Ви перемогли дракона!";
+      document.getElementById("battle-log").innerHTML += "<strong>Дракон повалений!</strong><br>";
+      document.getElementById("attack-button").disabled = true;
+      showFinalScene();
+    } else if (playerHealth <= 0) {
+      document.getElementById("game-text").innerHTML = "Вас переміг дракон...";
+      document.getElementById("battle-log").innerHTML += "<strong>Ви програли битву.</strong><br>";
+      document.getElementById("attack-button").disabled = true;
+    }
+  }
+
+  function showFinalScene() {
+    document.getElementById("game").style.display = "none";
+    const finalScene = document.createElement("div");
+    finalScene.style.padding = "20px";
+    finalScene.style.backgroundColor = "#111";
+    finalScene.style.border = "2px solid #FFD700";
+    finalScene.style.marginTop = "20px";
+    finalScene.innerHTML = `
+      <h2>🎉 Вітаємо! Ви перемогли дракона! 🎉</h2>
+      <p>Нарешті села можуть жити у мирі.</p>
+      <p>Ваше ім’я навіки залишиться в історії як герой.</p>
+      <button onclick="location.reload()">Почати спочатку</button>
+    `;
+    document.body.appendChild(finalScene);
+  }
+    // Функція, яка викликається після перемоги над драконом
+        function onDragonDefeated() {
+            const newsImage = document.getElementById('newsImage');
+            
+            // Показуємо зображення
+            newsImage.style.display = 'block';
+            
+            // Через 10 секунд ховаємо зображення
+            setTimeout(function() {
+                newsImage.style.display = 'none';
+            }, 10000);  // 10000 мілісекунд = 10 секунд
+        }
+
+  </script>
+</body>
+</html>
 
 
 
 
-.mountain-bg {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-}
 
-.bg-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
-.mountain-img {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height:50px;
-  z-index: 1;
-}
 
-.pech-btn {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  padding: 5px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
 
-.pech-img {
-  width: 200px;
-  height: auto;
-}
 
-.back-btn {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  padding: 15px 30px;
-  background-color: #ff6347;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 24px;
-  cursor: pointer;
-}
-.hints-box {
-  background-color: #ccc; /* сірий фон */
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  font-family: sans-serif;
-  max-width: 600px;
-  margin: 20px auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
-}
-.hints-box h2 {
-  margin-top: 0;
-  font-size: 24px;
-}
-.hints-box ol {
-  padding-left: 20px;
-}
+
+
+
+
+  
+
+   
+    
+ 
